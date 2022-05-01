@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+
+    <div id="container"></div>
+
+</body>
+
+<script>
+    let container = "container"
+
+    nav([
+        "Home",
+        "Features",
+        "Pricing", ["Models", ["1", "2", "3"]],
+        ["Cars", ["Mercedes", "BMW", "Toyota"]]
+    ]);
+
+    carousel([
+        "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/3660527/pexels-photo-3660527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    ]);
+
+    br();
+
+    cards([
+        [
+            "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-suliman-sallehi-1704488.jpg&fm=jpg",
+            "Card title",
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "Go somewhere"
+        ],
+        [
+            "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-suliman-sallehi-1704488.jpg&fm=jpg",
+            "Card title",
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "Go somewhere"
+        ],
+        [
+            "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-suliman-sallehi-1704488.jpg&fm=jpg",
+            "Card title",
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "Go somewhere"
+        ],
+        [
+            "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-suliman-sallehi-1704488.jpg&fm=jpg",
+            "Card title",
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "Go somewhere"
+        ]
+    ]);
+
+    // listGroups("container", [1, 2, 3, 4]);
+
+
+
+
+    function br() {
+        let br = createHTML("br", []);
+        document.getElementById(container).append(br);
+
+    }
+
+    function createCard(arr) {
+
+        let parent = createHTML("div", []);
+
+        let div = createHTML("div", ["class=card", "style=width: 18rem;"]);
+
+        let img = createHTML("img", [
+            "class=card-img-top",
+            "src=" + arr[0],
+            "alt=Card image cap"
+        ]);
+
+        div.append(img);
+
+        let card_body = createHTML("div", ["class=card-body"]);
+
+        let h5 = createHTML("h5", []);
+        h5.innerHTML = arr[1];
+
+        let p = createHTML("p", ["class=card-text"]);
+
+        p.innerHTML = arr[2];
+
+        let a = createHTML("a", ["class=btn btn-primary", "href=#"]);
+        a.innerHTML = arr[3];
+
+        card_body.append(h5);
+        card_body.append(p);
+        card_body.append(a);
+        div.append(img);
+        div.append(card_body);
+
+        parent.append(div)
+        return parent;
+        // document.getElementById(id).append(div);
+
+    }
+
+    function cards(arr) {
+        let row = createHTML("div", ["class=row justify-content-around"]);
+
+        arr.forEach((element, _) => {
+            let card = createCard(element);
+
+            // let x = createHTML("p", ["class=col-sm"]);
+            // x.innerHTML = "Test for fun!";
+            row.appendChild(card);
+        });
+
+        // div.append(row)
+        document.getElementById(container).append(row);
+
+    }
+
+    function carousel(arr) {
+        let div = createHTML("div", [
+            "id=carouselExampleSlidesOnly",
+            "class=carousel slide",
+            "data-ride=carousel"
+        ]);
+
+        let innerDiv = createHTML("div", [
+            "class=carousel-inner"
+        ]);
+
+        arr.forEach((element, index) => {
+            let imageDiv = "";
+            if (index == 0) {
+                imageDiv = createHTML("div", ["class=carousel-item active"]);
+            } else {
+                imageDiv = createHTML("div", ["class=carousel-item"]);
+            }
+            let img = createHTML("img", ["class=d-block w-100", "src=" + element, "alt=slide"]);
+            imageDiv.append(img);
+            innerDiv.append(imageDiv);
+        });
+
+        div.append(innerDiv);
+        document.getElementById(container).append(div);
+
+    };
+
+
+
+    function listGroups(arr) {
+        let div = createHTML("div", ["class=card", "style=width: 18rem;"]);
+
+        let ul = createHTML("ul", ["class=list-group list-group-flush"]);
+        arr.forEach((element, _) => {
+            let li = createHTML("li", ["class=list-group-item"]);
+            li.innerHTML = element;
+
+            ul.append(li);
+        });
+
+        div.append(ul);
+
+        if (id = "body") {
+            document.body.append(div);
+        } else {
+            document.getElementById(container).append(div);
+        }
+
+
+    }
+
+    function nav(arr) {
+
+        let nav = createHTML("nav", ["class=navbar navbar-expand-lg navbar-light bg-light"])
+
+        let div = createHTML("div", ["class=collapse navbar-collapse", "id=test"]);
+
+        let lu = createHTML("lu", ["class=navbar-nav"]);
+
+        arr.forEach((element, index) => {
+
+            if (typeof element === "object") {
+
+                let li = createHTML("li", ["class=nav-item dropdown"]);
+
+                let a = createHTML("a", [
+                    "class=nav-link dropdown-toggle",
+                    "href=#",
+                    "id=navbarDropdownMenuLink_dropdown",
+                    "data-toggle=dropdown",
+                    "aria-haspopup=true",
+                    "aria-expanded=false"
+                ]);
+
+                a.innerHTML = element[0];
+
+                let div = createHTML("div", ["class=dropdown-menu", "aria-labelledby=navbarDropdownMenuLink_dropdown"]);
+
+                element[1].forEach((dropdown_element, index) => {
+                    let a = createHTML("a", [
+                        "class=dropdown-item",
+                        "href=#",
+
+                    ]);
+
+                    a.innerHTML = dropdown_element;
+
+                    div.append(a);
+                });
+
+                li.append(a)
+                li.append(div);
+
+                lu.append(li);
+
+            } else {
+                let li = createHTML("li", ["class=nav-item active"]);
+
+                let a = createHTML("a", [
+                    "class=nav-link",
+                    "href=#",
+
+                ]);
+
+                a.innerHTML = element;
+                li.append(a);
+                lu.append(li)
+            }
+        });
+
+        div.append(lu);
+
+        nav.append(div);
+
+        document.getElementById(container).append(nav);
+    }
+
+
+    function createHTML(element, properties = null) {
+        let temp = document.createElement(element);
+
+        properties.forEach((element, _) => {
+            let style = element.split("=");
+            temp.setAttribute(style[0], style[1]);
+        });
+
+        return temp;
+    }
+</script>
+
+
+</html>
